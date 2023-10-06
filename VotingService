@@ -1,0 +1,38 @@
+class VotingService {
+    private Question question;
+    private Map<String, String> submissionMap;
+
+    public void configureQuestion(Question question) {
+        this.question = question;
+        submissionMap = new HashMap<>();
+    }
+
+    public void submitAnswer(Student student) {
+        if (question != null) {
+            submissionMap.put(student.getId(), student.answer);
+        }
+    }
+}
+
+    public void outputResults() {
+        if (question != null) {
+        Map<String, Integer> answerCounts = new HashMap<>();
+
+        // Initialize answerCounts with 0 counts for all choices
+        for (String choice : question.getChoices()) {
+            answerCounts.put(choice, 0);
+        }
+
+        // Count the submissions
+        for (String answer : submissionMap.values()) {
+            answerCounts.put(answer, answerCounts.get(answer) + 1);
+        }
+
+        // Print submission statistics
+        System.out.println("Submission Statistics:");
+        for (String choice : question.getChoices()) {
+            int count = answerCounts.get(choice);
+            System.out.println(choice + " : " + count);
+        }
+    }
+}

@@ -1,0 +1,29 @@
+import java.util.*;
+
+enum QuestionType {
+    SINGLE_CHOICE, MULTIPLE_CHOICE
+}
+
+public class SimulationDriver {
+    public static void main(String[] args) {
+        // Create and configure Question
+        Question question = new Question("What is your favorite season?", QuestionType.SINGLE_CHOICE,
+                Arrays.asList("Summer", "Fall", "Winter", "Spring"));
+
+        // Create VotingService and configure the question
+        VotingService votingService = new VotingService();
+        votingService.configureQuestion(question);
+
+        // Simulate student submissions
+        Random rand = new Random();
+        for (int i = 1; i <= 10; i++) {
+            Student student = new Student("Student" + i);
+            String randomAnswer = question.getChoices().get(rand.nextInt(question.getChoices().size()));
+            student.submitAnswer(randomAnswer);
+            votingService.submitAnswer(student);
+        }
+
+        // Display the results
+        votingService.outputResults();
+    }
+}

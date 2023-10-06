@@ -1,0 +1,11 @@
+class Question {
+    private String questionText;
+    private QuestionType questionType;
+    private List<String> choices;
+
+    public Question(String questionText, QuestionType questionType, List<String> choices) {
+        this.questionText = questionText;
+        this.questionType = questionType;
+        this.choices = choices;
+    }
+}
